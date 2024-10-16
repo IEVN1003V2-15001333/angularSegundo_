@@ -10,7 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   templateUrl: './zodiaco.component.html',
   styleUrls: ['./zodiaco.component.css']
 })
-export class ZodiacoComponent {
+export default class ZodiacoComponent {
   formulario: FormGroup;
   mostrarInformacion: boolean = false;
   signoZodiacal: string = '';

@@ -12,7 +12,7 @@ interface Usuario {
   horasExtras: number;
   subtotal: number;
 }
-
+//
 @Component({
   selector: 'app-empleados',
   standalone: true,

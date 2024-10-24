@@ -11,3 +11,5 @@ export default[
         loadComponent:()=>import('./sign-up/sign-up.component'),
     }
 ]as Routes
+
+

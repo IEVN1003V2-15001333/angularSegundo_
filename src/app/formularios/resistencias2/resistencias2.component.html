@@ -1,0 +1,85 @@
+<div class="container mx-auto mt-5">
+    <h1 class="text-center mb-6 text-2xl font-bold">Calculadora de Resistencias</h1>
+
+    <div class="flex justify-between">
+        <!-- Formulario a la izquierda -->
+        <div class="w-1/2 pr-5">
+            <form [formGroup]="formulario" (ngSubmit)="calcular()" class="mb-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="text-center">
+                        <label for="banda1" class="block font-bold">Primera Banda</label>
+                        <select id="banda1" formControlName="banda1" class="form-select mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                            <option value="" disabled selected>Seleccione un color</option>
+                            <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+                        </select>
+                    </div>
+
+                    <div class="text-center">
+                        <label for="banda2" class="block font-bold">Segunda Banda</label>
+                        <select id="banda2" formControlName="banda2" class="form-select mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                            <option value="" disabled selected>Seleccione un color</option>
+                            <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+                        </select>
+                    </div>
+
+                    <div class="text-center">
+                        <label for="banda3" class="block font-bold">Tercera Banda</label>
+                        <select id="banda3" formControlName="banda3" class="form-select mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                            <option value="" disabled selected>Seleccione un color</option>
+                            <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+                        </select>
+                    </div>
+
+                    <div class="text-center">
+                        <label for="tolerancia" class="block font-bold">Tolerancia</label>
+                        <div class="form-check mt-2">
+                            <input type="radio" id="oro" formControlName="tolerancia" class="form-check-input" value="oro">
+                            <label class="form-check-label" for="oro" class="ml-2">Oro</label>
+                        </div>
+                        <div class="form-check mt-2">
+                            <input type="radio" id="plata" formControlName="tolerancia" class="form-check-input" value="plata">
+                            <label class="form-check-label" for="plata" class="ml-2">Plata</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-6">
+                    <button type="submit" class="w-full sm:w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" [disabled]="formulario.invalid">Calcular</button>
+                    <button type="button" class="w-full sm:w-auto text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2" (click)="imprimirResultados()">Imprimir</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Tabla de resultados a la derecha -->
+        <div class="w-1/2 pl-5" *ngIf="mostrarTabla">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center bor border-blue-500 ">
+                    <thead>
+                        <tr>
+                            <th>Color 1</th>
+                            <th>Color 2</th>
+                            <th>Color 3</th>
+                            <th>Tolerancia</th>
+                            <th>Valor</th>
+                            <th>Valor Máximo</th>
+                            <th>Valor Mínimo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let resultado of resultados">
+                            <td [style.backgroundColor]="getColorCode(resultado.banda1)">{{ resultado.banda1 }}</td>
+                            <td [style.backgroundColor]="getColorCode(resultado.banda2)">{{ resultado.banda2 }}</td>
+                            <td [style.backgroundColor]="getColorCode(resultado.banda3)">{{ resultado.banda3 }}</td>
+                            <td [style.backgroundColor]="getToleranceColor(resultado.tolerancia)">
+                                {{ resultado.tolerancia }} {{ resultado.tolerancia === 'oro' ? '5%' : '10%' }}
+                            </td>
+                            <td>{{ calcularValor(resultado.banda1, resultado.banda2, resultado.banda3, resultado.tolerancia).valor }}</td>
+                            <td>{{ calcularValor(resultado.banda1, resultado.banda2, resultado.banda3, resultado.tolerancia).valorMaximo }}</td>
+                            <td>{{ calcularValor(resultado.banda1, resultado.banda2, resultado.banda3, resultado.tolerancia).valorMinimo }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

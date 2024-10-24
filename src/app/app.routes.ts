@@ -7,8 +7,16 @@ export const routes: Routes = [
   },
   {
     path: 'formularios',
-    loadChildren: () => import('./formularios/formularios.routes'),
+    loadChildren: () => import('./formularios/formularios.routes')
+  },
+  {
+    path: '',
+    redirectTo: 'formularios/empleados',
+    pathMatch: 'full'  // Redireccionamos a empleados por defecto
+  },
+  {
+    path: '',
+    redirectTo: 'formularios/resistencias2',
+    pathMatch: 'full'  // Redireccionamos a empleados por defecto
   }
 ];
-
-

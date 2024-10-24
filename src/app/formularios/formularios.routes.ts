@@ -1,13 +1,20 @@
 import { Routes } from "@angular/router";
 
-
-export default[
+export default [
     {
         path: 'ejemplo1',
-        loadComponent:()=>import('./ejemplo1/ejemplo1.component'),
+        loadComponent: () => import('./ejemplo1/ejemplo1.component'),
     },
     {
         path: 'zodiaco',
-        loadComponent:()=>import('./zodiaco/zodiaco.component'),
+        loadComponent: () => import('./zodiaco/zodiaco.component'),
+    },
+    {
+        path: 'empleados',
+        loadComponent: () => import('./empleados/empleados.component'),
+    },
+    {
+        path: 'resistencias2',
+        loadComponent: () => import('./resistencias2/resistencias2.component'),
     }
-]as Routes
+] as Routes;
